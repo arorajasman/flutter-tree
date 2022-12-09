@@ -130,7 +130,8 @@ class _TreeNodeState extends State<TreeNode>
                 RotationTransition(
                   child: IconButton(
                     iconSize: 16,
-                    icon: widget.icon,
+                    // show minus icon on expanded
+                    icon: _isExpaned ? const Icon(Icons.minimize) : widget.icon,
                     onPressed: () {
                       widget.onTap(widget.data);
 
