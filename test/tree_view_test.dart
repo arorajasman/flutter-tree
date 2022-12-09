@@ -11,7 +11,7 @@ MaterialApp myApp = MaterialApp(
       data: [
         TreeNodeData(
           title: 'title',
-          expanded: false,
+          expaned: false,
           checked: false,
           children: [],
           extra: null,

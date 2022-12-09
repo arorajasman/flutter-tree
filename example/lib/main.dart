@@ -13,14 +13,14 @@ class MyApp extends StatelessWidget {
     final data = [
       TreeNodeData(
         title: 'Load node 1',
-        expanded: false,
+        expaned: false,
         checked: true,
         children: [],
         extra: null,
       ),
       TreeNodeData(
         title: 'Load node 2',
-        expanded: true,
+        expaned: true,
         checked: false,
         children: [],
         extra: null,
@@ -43,13 +43,11 @@ class MyApp extends StatelessWidget {
           showActions: true,
           showCheckBox: true,
           showFilter: true,
-          contentTappable: true,
-          filterPlaceholder: "Custom placeholder",
           append: (parent) {
             print(parent.extra);
             return TreeNodeData(
               title: 'Appended',
-              expanded: true,
+              expaned: true,
               checked: true,
               children: [],
             );

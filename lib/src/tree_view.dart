@@ -9,17 +9,9 @@ class TreeView extends StatefulWidget {
   final bool lazy;
   final Widget icon;
   final double offsetLeft;
-  final int? maxLines;
   final bool showFilter;
-  final String filterPlaceholder;
   final bool showActions;
   final bool showCheckBox;
-  final bool contentTappable;
-
-  /// Desired behavior:
-  /// - if I check/uncheck a parent I want all children to be checked/unchecked
-  /// - if I check/uncheck all children I want the parent to be checked/unchecked
-  final bool manageParentState;
 
   final Function(TreeNodeData node)? onTap;
   final void Function(TreeNodeData node)? onLoad;
@@ -46,14 +38,10 @@ class TreeView extends StatefulWidget {
     this.load,
     this.lazy = false,
     this.offsetLeft = 24.0,
-    this.maxLines,
     this.showFilter = false,
-    this.filterPlaceholder = 'Search',
     this.showActions = false,
     this.showCheckBox = false,
-    this.contentTappable = false,
     this.icon = const Icon(Icons.expand_more, size: 16.0),
-    this.manageParentState = false,
   }) : super(key: key);
 
   @override
@@ -65,30 +53,24 @@ class _TreeViewState extends State<TreeView> {
   List<TreeNodeData> _renderList = [];
 
   List<TreeNodeData> _filter(String val, List<TreeNodeData> list) {
-    List<TreeNodeData> tempNodes = [];
-
+    List<TreeNodeData> temp = [];
     for (int i = 0; i < list.length; i++) {
-      TreeNodeData tempNode = TreeNodeData.from(list[i]);
-
-      if (tempNode.children.isNotEmpty) {
-        tempNode.children = _filter(val, tempNode.children);
+      if (list[i].title.contains(val)) {
+        temp.add(list[i]);
       }
-
-      if (tempNode.title.contains(RegExp(val, caseSensitive: false)) || tempNode.children.isNotEmpty) {
-        tempNodes.add(tempNode);
+      if (list[i].children.isNotEmpty) {
+        list[i].children = _filter(val, list[i].children);
       }
     }
-
-    return tempNodes;
+    return temp;
   }
 
   void _onChange(String val) {
-     _renderList = widget.data;
-
     if (val.isNotEmpty) {
       _renderList = _filter(val, _renderList);
+    } else {
+      _renderList = widget.data;
     }
-
     setState(() {});
   }
 
@@ -132,7 +114,7 @@ class _TreeViewState extends State<TreeView> {
       title: '',
       extra: null,
       checked: false,
-      expanded: false,
+      expaned: false,
       children: _renderList,
     );
   }
@@ -149,12 +131,7 @@ class _TreeViewState extends State<TreeView> {
                 right: 18.0,
                 bottom: 12.0,
               ),
-              child: TextField(
-                onChanged: _onChange,
-                 decoration: InputDecoration(
-                  labelText: widget.filterPlaceholder,
-                )
-              ),
+              child: TextField(onChanged: _onChange),
             ),
           ...List.generate(
             _renderList.length,
@@ -164,15 +141,12 @@ class _TreeViewState extends State<TreeView> {
                 remove: remove,
                 append: append,
                 parent: _root,
-                parentState: widget.manageParentState ? this : null,
                 data: _renderList[index],
                 icon: widget.icon,
                 lazy: widget.lazy,
                 offsetLeft: widget.offsetLeft,
-                maxLines: widget.maxLines,
                 showCheckBox: widget.showCheckBox,
                 showActions: widget.showActions,
-                contentTappable: widget.contentTappable,
                 onTap: widget.onTap ?? (n) {},
                 onLoad: widget.onLoad ?? (n) {},
                 onCheck: widget.onCheck ?? (b, n) {},
