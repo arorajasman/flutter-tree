@@ -150,7 +150,9 @@ class _TreeNodeState extends State<TreeNode>
                 RotationTransition(
                   child: IconButton(
                     iconSize: 16,
-                    icon: hasData ? widget.icon : Container(),
+                    icon: hasData
+                        ? widget.icon
+                        : const Icon(Icons.arrow_forward_ios),
                     onPressed: hasData
                         ? () {
                             widget.onTap(widget.data);
