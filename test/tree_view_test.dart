@@ -15,6 +15,8 @@ MaterialApp myApp = MaterialApp(
           checked: false,
           children: [],
           extra: null,
+          devices: "",
+          zones: "",
         ),
       ],
     ),
