@@ -41,7 +41,7 @@ class TreeView extends StatefulWidget {
     this.showFilter = false,
     this.showActions = false,
     this.showCheckBox = false,
-    this.icon = const Icon(Icons.expand_more, size: 16.0),
+    this.icon = const Icon(Icons.add, size: 16.0),
   }) : super(key: key);
 
   @override
@@ -116,6 +116,8 @@ class _TreeViewState extends State<TreeView> {
       checked: false,
       expaned: false,
       children: _renderList,
+      zones: "",
+      devices: "",
     );
   }
 

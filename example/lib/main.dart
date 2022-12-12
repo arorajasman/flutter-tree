@@ -17,13 +17,26 @@ class MyApp extends StatelessWidget {
         checked: true,
         children: [],
         extra: null,
+        zones: "12 Zones",
+        devices: "7 Devices",
       ),
       TreeNodeData(
         title: 'Load node 2',
-        expaned: true,
+        expaned: false,
         checked: false,
         children: [],
         extra: null,
+        zones: "12 Zones",
+        devices: "7 Devices",
+      ),
+      TreeNodeData(
+        title: 'Load node 3',
+        expaned: false,
+        checked: false,
+        children: [],
+        extra: null,
+        zones: "12 Zones",
+        devices: "7 Devices",
       ),
     ];
 
@@ -44,43 +57,22 @@ class MyApp extends StatelessWidget {
           showCheckBox: true,
           showFilter: true,
           append: (parent) {
-            print(parent.extra);
             return TreeNodeData(
               title: 'Appended',
               expaned: true,
               checked: true,
               children: [],
+              zones: "",
+              devices: "",
             );
           },
-          onLoad: (node) {
-            print('onLoad');
-            print(node);
-          },
-          onAppend: (node, parent) {
-            print('onAppend');
-            print(node);
-          },
-          onCheck: (checked, node) {
-            print('checked');
-            print('onCheck');
-            print(node);
-          },
-          onCollapse: (node) {
-            print('onCollapse');
-            print(node);
-          },
-          onExpand: (node) {
-            print('onExpand');
-            print(node);
-          },
-          onRemove: (node, parent) {
-            print('onRemove');
-            print(node);
-          },
-          onTap: (node) {
-            print('onTap');
-            print(node);
-          },
+          onLoad: (node) {},
+          onAppend: (node, parent) {},
+          onCheck: (checked, node) {},
+          onCollapse: (node) {},
+          onExpand: (node) {},
+          onRemove: (node, parent) {},
+          onTap: (node) {},
         ),
       ),
     );

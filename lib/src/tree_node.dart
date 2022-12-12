@@ -130,7 +130,6 @@ class _TreeNodeState extends State<TreeNode>
                 RotationTransition(
                   child: IconButton(
                     iconSize: 16,
-                    // show minus icon on expanded
                     icon: _isExpaned ? const Icon(Icons.minimize) : widget.icon,
                     onPressed: () {
                       widget.onTap(widget.data);
@@ -171,10 +170,18 @@ class _TreeNodeState extends State<TreeNode>
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 6.0),
-                    child: Text(
-                      widget.data.title,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          widget.data.title,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        const SizedBox(height: 5.0),
+                        showSubtitle(),
+                      ],
                     ),
                   ),
                 ),
@@ -217,5 +224,17 @@ class _TreeNodeState extends State<TreeNode>
         )
       ],
     );
+  }
+
+  Widget showSubtitle() {
+    if (widget.data.zones.isEmpty && widget.data.devices.isEmpty) {
+      return Container();
+    } else if (widget.data.zones.isEmpty && widget.data.zones != "") {
+      return Text(widget.data.zones);
+    } else if (widget.data.devices.isEmpty && widget.data.devices != "") {
+      return Text(widget.data.devices);
+    } else {
+      return Text("${widget.data.zones} | ${widget.data.devices}");
+    }
   }
 }
