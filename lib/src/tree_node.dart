@@ -238,10 +238,10 @@ class _TreeNodeState extends State<TreeNode>
     } else if (widget.data.zones.isEmpty && widget.data.zones != "") {
       return Text(widget.data.zones + " zones", style: textStyle);
     } else if (widget.data.devices.isEmpty && widget.data.devices != "") {
-      return Text(widget.data.devices + " ", style: textStyle);
+      return Text(widget.data.devices + " devices", style: textStyle);
     } else {
       return Text(
-        "${widget.data.zones} | ${widget.data.devices}",
+        "${widget.data.zones} zones | ${widget.data.devices} devices",
         style: textStyle,
       );
     }
