@@ -227,14 +227,23 @@ class _TreeNodeState extends State<TreeNode>
   }
 
   Widget showSubtitle() {
+    const TextStyle textStyle = TextStyle(
+      fontWeight: FontWeight.w400,
+      color: Color(0xFF728192),
+      fontSize: 12.0,
+    );
+
     if (widget.data.zones.isEmpty && widget.data.devices.isEmpty) {
       return Container();
     } else if (widget.data.zones.isEmpty && widget.data.zones != "") {
-      return Text(widget.data.zones);
+      return Text(widget.data.zones + " zones", style: textStyle);
     } else if (widget.data.devices.isEmpty && widget.data.devices != "") {
-      return Text(widget.data.devices);
+      return Text(widget.data.devices + " ", style: textStyle);
     } else {
-      return Text("${widget.data.zones} | ${widget.data.devices}");
+      return Text(
+        "${widget.data.zones} | ${widget.data.devices}",
+        style: textStyle,
+      );
     }
   }
 }
